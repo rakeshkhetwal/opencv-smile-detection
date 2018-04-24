@@ -18,7 +18,7 @@ while True:
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    faces = faceCascade.detectMultiScale(gray,scaleFactor= sF,minNeighbors=8,minSize=(55, 55),flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
+    faces = faceCascade.detectMultiScale(gray,scaleFactor= sF,minNeighbors=8,minSize=(55, 55),flags=cv2.CASCADE_SCALE_IMAGE)
     # ---- Draw a rectangle around the faces
 
     for (x, y, w, h) in faces:
@@ -26,7 +26,7 @@ while True:
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = frame[y:y+h, x:x+w]
 
-        smile = smileCascade.detectMultiScale(roi_gray,scaleFactor= 1.7,minNeighbors=22,minSize=(25, 25),flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
+        smile = smileCascade.detectMultiScale(roi_gray,scaleFactor= 1.7,minNeighbors=22,minSize=(25, 25),flags=cv2.CASCADE_SCALE_IMAGE)
 
         # Set region of interest for smiles
         for (x, y, w, h) in smile:
@@ -35,9 +35,9 @@ while True:
             #print "!!!!!!!!!!!!!!!!!"
 
     #cv2.cv.Flip(frame, None, 1)
-    cv2.imshow('Smile Detector', frame)
-    c = cv2.cv.WaitKey(7) % 0x100
-    if c == 27:
+    #cv2.imshow('Smile Detector', frame)
+    k = cv2.waitKey(33)
+    if k == 27:
         break
 
 cap.release()
